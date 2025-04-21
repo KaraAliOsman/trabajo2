@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comentarios de Tarea</title>
+
+  <style>
+   
+    body {
+      font-family: sans-serif;    
+      padding: 20px;          
+      background-image: url(https://cdn3.f-cdn.com/contestentries/49129/3258356/52c30e6949649_thumb900.jpg);      
+    }
+
+    .comment {
+      background: white;                             
+      padding: 10px;                            
+      border-radius: 5px;                            
+      margin-bottom: 15px;                           
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);      
+    }
+
+    .commentario {
+      display: flex;              
+      align-items: center;       
+      margin-bottom: 5px;         
+    }
+
+    img {
+      width: 40px;                
+      height: 40px;                
+      border-radius: 50%;        
+      margin-right: 10px;          
+    }
+
+    
+
+    .tiempo {
+      font-size: 0.8em;
+      color: gray;
+    }
+
+    
+
+    .respuesta {
+      background: #919191;       
+      margin-top: 10px;            
+      padding: 8px;             
+      border-radius: 5px;        
+      margin-left: 41px;   
+      margin-left: 50px;          
+      font-size: 1em;           
+    }
+
+  </style>
+</head>
+<body>
+
+  <h2>Comentarios de la tarea</h2>
+
+  <div id="comments-container"></div>
+
+  <script>
+    const comments = [
+      {
+        autor: {
+          name: "María Pérez",                  
+          image: "https://placehold.co/50x50" 
+        },
+        content: "¿Alguien avanzó con el diseño del formulario?",
+        created_at: "2025-04-20 09:30",           
+        responses: [                            
+          {
+            autor: {
+              name: "Carlos Gómez",
+              image: "https://placehold.co/50x50"
+            },
+            content: "Sí, lo subí esta mañana al Drive.",
+            created_at: "2025-04-20 10:00"
+          }
+        ]
+      },
+      {
+        autor: {
+          name: "Lucía Fernández",
+          image: "https://placehold.co/50x50"
+        },
+        content: "¿Confirmamos la reunión del jueves?",
+        created_at: "2025-04-20 08:45",
+        responses: []   
+      }
+    ];
+
+    const container = document.getElementById("comments-container");
+
+    comments.forEach(comment => {
+
+       html = `
+        <div class="comment">
+          <div class="commentario">
+
+            <img src="${comment.autor.image}" alt="Foto de ${comment.autor.name}">
+            <div>
+
+              <strong>${comment.autor.name}</strong><br>
+              <span class="tiempo">${comment.created_at}</span>
+            </div>
+          </div>
+
+          <div class="comment-content">${comment.content}</div>
+      `;
+
+    
+      if (comment.responses.length > 0) {
+        comment.responses.forEach(response => {
+          html += `
+            <div class="respuesta">
+              <div class="commentario">
+                <img src="${response.autor.image}" alt="Foto de ${response.autor.name}">
+                <div>
+                  <strong>${response.autor.name}</strong><br>
+                  <span class="tiempo">${response.created_at}</span>
+                </div>
+              </div>
+              <div class="comment-content">${response.content}</div>
+            </div>
+          `;
+        });
+      }
+
+      container.innerHTML += html;  
+    });
+  </script>
+</body>
+</html>
